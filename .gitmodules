@@ -1,0 +1,3 @@
+[submodule "teoria"]
+	path = teoria
+	url = git@github.com:saebekassebil/teoria.git
