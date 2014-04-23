@@ -1,3 +1,6 @@
 [submodule "teoria"]
 	path = teoria
 	url = https://github.com/saebekassebil/teoria.git
+[submodule "midi"]
+	path = midi
+	url = https://github.com/mudcube/MIDI.js.git
