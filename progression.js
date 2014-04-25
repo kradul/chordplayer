@@ -13,8 +13,6 @@ function Progression () {
 		/*triad_degrees - degree in the scale of each note in the triad (ex. 2nd, 4th, 6th)*/
 		//return the interval (number of half steps) above the root each degree is
 		var intervals = triad_degrees.map(this.scale.get_interval);
-		console.log("intervals");
-		console.log(intervals);
 		return intervals;
 	};
 

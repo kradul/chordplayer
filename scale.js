@@ -15,8 +15,11 @@ function Scale () {
 	this.get_degree = function (deg){
 		/*given an integer meaning music interval above the root (ex. fifth = 5)
 		return the degree in the scale (with appropriate modulo etc)*/
-		var scale_size = self.scale_intervals.length;
-		return (deg - 1) % scale_size + 1; //degrees come in 1-indexed and should leave 1-indexed
+		return (deg - 1) % self.size() + 1; //degrees come in 1-indexed and should leave 1-indexed
+	}
+
+	this.size = function () {
+		return self.scale_intervals.length;
 	}
 
 	this.set_scale = function (scale) {

@@ -8,15 +8,19 @@ $( document ).ready(function() {
 			}
 		});
 
+	var generate_chord = function (progression){
+		var degree = Math.floor((Math.random()*progression.scale.size())+1); //random number between 1 and scale size
+		var chord = progression.get_chord(degree);
+
+		MIDI.chordOn(0, chord, 127, 0);
+		MIDI.chordOff(0, chord, 127, 1.75);
+	}
+
 	$("#play").click(function () {
 		var p = new Progression();
 		p.scale = new Scale();
 		p.tonic = midi_octave_notes[0]; //tonic = middle c
 
-		var subdom = p.get_chord(5);
-
-		console.log(p.tonic);
-		console.log(subdom);
 
 		var delay = 0; // play one note every quarter second
 		var note = p.tonic; // the MIDI note
@@ -26,11 +30,19 @@ $( document ).ready(function() {
 		MIDI.noteOn(0, note, velocity, delay);
 		MIDI.noteOff(0, note, delay + 0.75);
 
-		note = subdom[0];
-		MIDI.noteOn(0, note, velocity, delay + 1);
-		MIDI.noteOff(0, note, delay + 1.75);
+		/*
+		var subdom = p.get_chord(5);
+
+		MIDI.chordOn(0, subdom, velocity, delay + 1);
+		MIDI.chordOff(0, subdom, delay + 1.75);
+		*/
+
+		setInterval(generate_chord(p),1000);
 	});
 
+	$("#pause").click(function () {
+		clearInterval();
+	});
 
 });
 
