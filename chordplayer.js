@@ -5,17 +5,21 @@ $( document ).ready(function() {
 			callback: function(){}
 		});
 
-	console.log("HIIIII");
+	var note = teoria.note.fromMIDI(36);
+
+	console.log(note.scientific());
 
 	$("#play").click(function () {
 		var delay = 0; // play one note every quarter second
-			var note = 50; // the MIDI note
-			var velocity = 127; // how hard the note hits
-			// play the note
-			MIDI.setVolume(0, 127);
-			MIDI.noteOn(0, note, velocity, delay);
-			MIDI.noteOff(0, note, delay + 0.75);
+		var note = 50; // the MIDI note
+		var velocity = 127; // how hard the note hits
+		// play the note
+		MIDI.setVolume(0, 127);
+		MIDI.noteOn(0, note, velocity, delay);
+		MIDI.noteOff(0, note, delay + 0.75);
 	});
+
+
 });
 
 //start a local webserver python -m SimpleHTTPServer 8000
