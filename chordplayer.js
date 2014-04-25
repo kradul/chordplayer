@@ -1,3 +1,4 @@
+
 $( document ).ready(function() {
 	MIDI.loadPlugin({
 			soundfontUrl: "./midi/soundfont/",
@@ -57,3 +58,4 @@ $( document ).ready(function() {
 			
 	// 		return midiValue;	
 	// 	};
+
