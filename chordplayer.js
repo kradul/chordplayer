@@ -3,21 +3,32 @@ $( document ).ready(function() {
 	MIDI.loadPlugin({
 			soundfontUrl: "./midi/soundfont/",
 			instrument: "acoustic_grand_piano",
-			callback: function(){}
+			callback: function(){
+				//TODO make this set some variable indicating loading is done
+			}
 		});
 
-	var note = teoria.note.fromMIDI(36);
-
-	console.log(note.scientific());
-
 	$("#play").click(function () {
+		var p = new Progression();
+		p.scale = new Scale();
+		p.tonic = midi_octave_notes[0]; //tonic = middle c
+
+		var subdom = p.get_chord(5);
+
+		console.log(p.tonic);
+		console.log(subdom);
+
 		var delay = 0; // play one note every quarter second
-		var note = 50; // the MIDI note
+		var note = p.tonic; // the MIDI note
 		var velocity = 127; // how hard the note hits
 		// play the note
 		MIDI.setVolume(0, 127);
 		MIDI.noteOn(0, note, velocity, delay);
 		MIDI.noteOff(0, note, delay + 0.75);
+
+		note = subdom[0];
+		MIDI.noteOn(0, note, velocity, delay + 1);
+		MIDI.noteOff(0, note, delay + 1.75);
 	});
 
 
