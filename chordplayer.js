@@ -21,6 +21,9 @@ $( document ).ready(function() {
 	var intervalId;
 
 	$("#play").click(function () {
+		new Audio('./Interlude2.mp3').play();
+
+		/*
 		var p = new Progression();
 		p.scale = new Scale();
 		p.tonic = midi_octave_notes[0]; //tonic = middle c
@@ -35,6 +38,7 @@ $( document ).ready(function() {
 		MIDI.noteOff(0, note, delay + 0.75);
 
 		intervalId = setInterval(function() { generate_chord(p); }, 1000);
+		*/
 	});
 
 	$("#pause").click(function () {
