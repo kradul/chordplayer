@@ -26,7 +26,6 @@ function Progression () {
 		return midi_chord;
 	}
 
-
 	this.get_chord = function (chord_degree){
 		var degrees = this.get_triad_degrees(chord_degree);
 		var intervals = this.get_triad_intervals(degrees);
