@@ -1,11 +1,13 @@
 
 function ChordNamer () {
 	var path = "./chordnames/";
-	new Audio('./Interlude2.mp3').play();
+	var vol = 0.3; //volume to play at, TODO make a user-editable parameter
 
 	this.name_chord = function (degree) {
 		file = path + degree + ".mp3";
-		new Audio(file).play();
+		var a = new Audio(file);
+		a.volume = vol;
+		a.play();
 	}
 
 }
