@@ -28,12 +28,12 @@
 	margin-bottom: 6px;
 }
 
-#period_slider {
+.slider {
 	width: 200px;
 	height: 6px;
 }	
 
-#period_slider a { 
+.slider a { 
 	height: 13px;
 	width: 10px;
 }
