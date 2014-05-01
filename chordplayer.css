@@ -1,4 +1,33 @@
 
+#title {
+	font-size: 30pt;
+}
+
+#button-container {
+	margin: 30px 0px 30px 0px;
+}
+
+#button-container button {
+	/*top right bottom left*/
+	padding: 9px 27px 9px 27px;
+	font-size: 13pt;
+	margin-right: 16px;
+}
+
+
+#settings-title {
+	font-size: 20pt;
+}
+
+.setting {
+	margin: 9px 0px 9px 30px;
+}
+
+.settings-label {
+	font-size: 12pt;
+	margin-bottom: 6px;
+}
+
 #period_slider {
 	width: 200px;
 	height: 6px;
