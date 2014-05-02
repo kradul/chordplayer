@@ -14,13 +14,13 @@
 	margin-right: 16px;
 }
 
+/*all direct div children of #settings-container except #settings-title*/
+#settings-container>div:not(#settings-title) {
+	margin: 9px 0px 9px 30px;
+}
 
 #settings-title {
 	font-size: 20pt;
-}
-
-.setting {
-	margin: 9px 0px 9px 30px;
 }
 
 .settings-label {

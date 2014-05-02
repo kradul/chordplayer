@@ -32,6 +32,8 @@ function ChordPlayer () {
 			soundfontUrl: "./midi/soundfont/",
 			instrument: "acoustic_grand_piano",
 			callback: function(){
+				MIDI.setVolume(0, 127);
+
 				self.loaded = true;
 				//TODO make this set some variable indicating loading is done
 				$("#play").removeAttr("disabled");
@@ -40,7 +42,7 @@ function ChordPlayer () {
 	};
 
 	this.play_chord = function (){
-		var degree = Math.floor((Math.random()*self.progression.scale.size())+1); //random number between 1 and scale size
+		var degree = random_index(self.progression.scale.scale_intervals)+1; //random number between 1 and scale size
 		var chord = self.progression.get_chord(degree);
 
 		MIDI.chordOn(0, chord, 127, 0);
@@ -74,25 +76,53 @@ function ChordPlayer () {
 		self.delay = self.delay > max_delay ? max_delay : self.delay;
 	}
 
+	//helper function for choosing a random note out of a list
+	var random_index = function (arr) {
+		return Math.floor(Math.random()*arr.length);
+	} 
+
+	this.play_tonic = function () {
+		var note = self.progression.tonic; // the MIDI note
+		var velocity = 127; // how hard the note hits
+		// play the note
+		MIDI.noteOn(0, note, velocity, 0);
+		MIDI.noteOff(0, note, 0.75);
+	}
+
+	this.play = function () {
+		self.intervalId = setInterval(self.play_chord, self.period);
+	}
+
+	this.stop_play = function () {
+		clearInterval(self.intervalId);
+	}
+
 	/*
 	Binding buttons
 	*/
 
 	$("#play").click(function () {
-		var delay = 0; 
-		var note = self.progression.tonic; // the MIDI note
-		var velocity = 127; // how hard the note hits
-		// play the note
-		MIDI.setVolume(0, 127);
-		MIDI.noteOn(0, note, velocity, delay);
-		MIDI.noteOff(0, note, delay + 0.75);
-
-		self.intervalId = setInterval(self.play_chord, self.period);
+		self.play_tonic();
+		self.play();
 		self.disable_play();
 	});
 
-	$("#pause").click(function () {
-		clearInterval(self.intervalId);
+	$("#change-key").click(function () {
+		//pick a random new midi_ocatve_note
+		self.progression.tonic = midi_octave_notes[random_index(midi_octave_notes)];
+		self.stop_play();
+
+		//wait for playing to actually end before starting new stuff
+		setTimeout(function() {
+			self.play_tonic();
+			self.play();
+			self.disable_play();
+		}, 
+		DELAY_POST_PERIOD);
+	});
+
+	$("#pause").click(function(){ 
+		self.stop_play();
 		self.enable_play();
 	});
 
