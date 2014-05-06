@@ -31,9 +31,16 @@
 .slider {
 	width: 200px;
 	height: 6px;
+	display: inline-block;
+	margin-left: 9px;
+	margin-right: 9px;
 }	
 
 .slider a { 
 	height: 13px;
 	width: 10px;
+}
+
+.increment-button {
+	width: 23px;
 }

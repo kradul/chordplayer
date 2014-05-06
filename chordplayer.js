@@ -135,6 +135,9 @@ function ChordPlayer () {
 
 	$("#period_slider").bind('slidechange', function(event, ui) {
 		self.period = ui.value;
+
+		console.log(self.period);
+
 		self.update_delay(); 
 
 		//if currently playing, reset play_chord to be called on the new period 
@@ -153,6 +156,24 @@ function ChordPlayer () {
 
 	$("#delay_slider").bind('slidechange', function(event, ui) {
 		self.delay = ui.value;
+	});
+
+	$(".increment-button").click(function(){
+		var slider_sel = $(this).attr('slider');
+		var slider_node = $("#" + slider_sel);
+		var dir = parseInt($(this).attr('dir'), 10);
+
+		var curr_val = slider_node.slider( "option", "value" );
+		var new_val = curr_val + dir * slider_node.slider( "option", "step" );
+
+		/*check to not exceed max and min*/
+		var max = slider_node.slider( "option", "max");
+		new_val = new_val > max ? max : new_val;
+		var min = slider_node.slider( "option", "min");
+		new_val = new_val < min ? min : new_val;
+
+		//update the val
+		slider_node.slider( "option", "value", new_val );
 	});
 
 }
