@@ -1,0 +1,39 @@
+
+#title {
+	font-size: 30pt;
+}
+
+#button-container {
+	margin: 30px 0px 30px 0px;
+}
+
+#button-container button {
+	/*top right bottom left*/
+	padding: 9px 27px 9px 27px;
+	font-size: 13pt;
+	margin-right: 16px;
+}
+
+/*all direct div children of #settings-container except #settings-title*/
+#settings-container>div:not(#settings-title) {
+	margin: 9px 0px 9px 30px;
+}
+
+#settings-title {
+	font-size: 20pt;
+}
+
+.settings-label {
+	font-size: 12pt;
+	margin-bottom: 6px;
+}
+
+.slider {
+	width: 200px;
+	height: 6px;
+}	
+
+.slider a { 
+	height: 13px;
+	width: 10px;
+}
