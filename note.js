@@ -8,9 +8,3 @@ var midi_octave_notes = Array.apply(null, Array(12)).map(function (_, i) {return
 //integers [1,12] representing all the half steps in an octave, abstractly
 var octave_notes = Array.apply(null, Array(12)).map(function (_, i) {return i + 1;});
 
-
-//TODO this class probably won't be useful until there are options for more complex voicing
-function Note () {
-	this.midi; //midi number for this note
-
-}

@@ -42,7 +42,7 @@ function ChordPlayer () {
 	};
 
 	this.play_chord = function (){
-		var degree = random_index(self.progression.scale.scale_intervals)+1; //random number between 1 and scale size
+		var degree = Utils.random_index(self.progression.scale.scale_intervals)+1; //random number between 1 and scale size
 		var chord = self.progression.get_chord(degree);
 
 		MIDI.chordOn(0, chord, 127, 0);
@@ -76,11 +76,6 @@ function ChordPlayer () {
 		self.delay = self.delay > max_delay ? max_delay : self.delay;
 	}
 
-	//helper function for choosing a random note out of a list
-	var random_index = function (arr) {
-		return Math.floor(Math.random()*arr.length);
-	} 
-
 	this.play_tonic = function () {
 		var note = self.progression.tonic; // the MIDI note
 		var velocity = 127; // how hard the note hits
@@ -109,7 +104,7 @@ function ChordPlayer () {
 
 	$("#change-key").click(function () {
 		//pick a random new midi_ocatve_note
-		self.progression.tonic = midi_octave_notes[random_index(midi_octave_notes)];
+		self.progression.tonic = Utils.random_element(midi_octave_notes);
 		self.stop_play();
 
 		//wait for playing to actually end before starting new stuff

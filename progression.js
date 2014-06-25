@@ -12,7 +12,8 @@ function Progression () {
 	this.get_triad_intervals = function (triad_degrees) {
 		/*triad_degrees - degree in the scale of each note in the triad (ex. 2nd, 4th, 6th)*/
 		//return the interval (number of half steps) above the root each degree is
-		var intervals = triad_degrees.map(this.scale.get_interval);
+		var chord = new Chord({"degrees": triad_degrees, "scale": self.scale});
+		var intervals = chord.voice(); //create a random voicing of this chord
 		return intervals;
 	};
 
