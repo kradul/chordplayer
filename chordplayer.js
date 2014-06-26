@@ -168,6 +168,11 @@ function ChordPlayer () {
 		slider_node.slider( "option", "value", new_val );
 	});
 
+	$("#root-only-checkbox").change(function () {
+		var root_only = $(this).is(":checked");
+		self.progression.root_only = root_only;
+	});
+
 }
 
 

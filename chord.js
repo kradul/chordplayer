@@ -5,23 +5,28 @@ function Chord (args) {
 	var self = this;
 	this.degrees = args.degrees;
 	this.scale = args.scale;
+	this.root_only = args.root_only;
 
 	//create a random voicing of this chord
 	this.voice = function () {
 		var octave = Utils.random_element([-1, 0, 1]);
 		var inversion = Utils.random_index(self.degrees);
 
-		var interval_functions = [
-			function () {
-				return self.in_octave(octave);
-			},
-			function () {
-				return self.inversion(octave, inversion);
-			},
-			function () {
-				return self.inversion_bass(octave, inversion);
-			}
-		];
+		var interval_functions = self.root_only 
+			? 
+			[function () { return self.root_position(octave); }]
+			: 
+			[
+				function () {
+					return self.in_octave(octave);
+				},
+				function () {
+					return self.inversion(octave, inversion);
+				},
+				function () {
+					return self.inversion_bass(octave, inversion);
+				}
+			];
 
 		var intervals = Utils.random_element(interval_functions)();
 

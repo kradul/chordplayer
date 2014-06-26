@@ -4,6 +4,8 @@ function Progression () {
 	this.tonic; //specified as a midi_octave number
 	this.scale;
 
+	this.root_only = false;
+
 	this.get_triad_degrees = function (chord_degree) {
 		//defines a chord as a triad separated by thirds
 		return [chord_degree, self.scale.get_degree(chord_degree+2), self.scale.get_degree(chord_degree+4)];
@@ -12,7 +14,7 @@ function Progression () {
 	this.get_triad_intervals = function (triad_degrees) {
 		/*triad_degrees - degree in the scale of each note in the triad (ex. 2nd, 4th, 6th)*/
 		//return the interval (number of half steps) above the root each degree is
-		var chord = new Chord({"degrees": triad_degrees, "scale": self.scale});
+		var chord = new Chord({"degrees": triad_degrees, "scale": self.scale, "root_only": self.root_only});
 		var intervals = chord.voice(); //create a random voicing of this chord
 		return intervals;
 	};
