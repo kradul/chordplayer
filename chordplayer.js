@@ -130,9 +130,6 @@ function ChordPlayer () {
 
 	$("#period_slider").bind('slidechange', function(event, ui) {
 		self.period = ui.value;
-
-		console.log(self.period);
-
 		self.update_delay(); 
 
 		//if currently playing, reset play_chord to be called on the new period 

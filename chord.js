@@ -11,35 +11,24 @@ function Chord (args) {
 		var octave = Utils.random_element([-1, 0, 1]);
 		var inversion = Utils.random_index(self.degrees);
 
-		console.log("degrees: " + self.degrees);
-		console.log("octave: " + octave);
-		console.log("inversion: " + inversion);
-
 		var interval_functions = [
 			function () {
-				console.log("in_octave");
 				return self.in_octave(octave);
 			},
 			function () {
-				console.log("inversion");
 				return self.inversion(octave, inversion);
 			},
 			function () {
-				console.log("inversion_bass");
 				return self.inversion_bass(octave, inversion);
 			}
 		];
 
 		var intervals = Utils.random_element(interval_functions)();
 
-		console.log("intervals: ", intervals);
-
 		//add double note
 		var double_index = Utils.random_index(self.degrees);
 		var double_octave =  Utils.random_element([-1, 0, 1]);
 		intervals = self.double_note(double_octave, double_index, intervals);
-
-		console.log("final intervals: ", intervals);
 
 		return intervals;
 	};
@@ -49,7 +38,7 @@ function Chord (args) {
 	this.in_octave = function (octave) {
 		octave = octave || 0;
 		return self.degrees.map(function(degree) {
-			self.scale.get_interval(degree, octave);
+			return self.scale.get_interval(degree, octave);
 		});
 	};
 
@@ -67,7 +56,8 @@ function Chord (args) {
 		var invert_index = self.degrees.length-1 - inversion; //length-1 because zero-index
 		var intervals = [];
 		$.each(self.degrees, function(i, degree){
-			var transpose = degree > self.degrees[i-1] ? 0 : 1; //if the next degree is smaller than the one before it, 
+			var root = self.degrees[0] || 0;
+			var transpose = degree < root ? 1 : 0; //if the next degree is smaller than the root, 
 				//must add an octave to create a root position chord
 			transpose += i > invert_index ? -1 : 0; //degrees larger than the invert_index get transposed an octave down
 			transpose += octave; //transpose everything by the octaves argument
@@ -88,7 +78,7 @@ function Chord (args) {
 			return;
 		}
 		//index of the bass note:
-		var invert_index = self.degrees.length-1 - inversion;
+		var invert_index = (self.degrees.length - inversion) % self.degrees.length; //inversion are weird because zero-th means root, but 1st means last note etc
 		var bass = self.degrees[invert_index];
 		var bass_interval = self.scale.get_interval(bass, octave-1);
 
