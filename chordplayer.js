@@ -22,7 +22,7 @@ function ChordPlayer () {
 	this.progression = new Progression();
 	this.progression.scale = new Scale();
 	this.progression.tonic = midi_octave_notes[0]; //tonic = middle c
-	
+	this.available_degrees = [1, 2, 3, 4, 5, 6, 7] //default chords that are available for playing
 
 	this.loaded = false; //whether loading MIDI stuff has finished
 	this.intervalId; //storing the id of the pending call of the chord playing function (for setTimeout)
@@ -42,7 +42,7 @@ function ChordPlayer () {
 	};
 
 	this.play_chord = function (){
-		var degree = Utils.random_index(self.progression.scale.scale_intervals)+1; //random number between 1 and scale size
+		var degree = Utils.random_element(self.available_degrees);
 		var chord = self.progression.get_chord(degree);
 
 		MIDI.chordOn(0, chord, 127, 0);
@@ -91,6 +91,8 @@ function ChordPlayer () {
 	this.stop_play = function () {
 		clearInterval(self.intervalId);
 	}
+
+  
 
 	/*
 	Binding buttons
@@ -172,6 +174,11 @@ function ChordPlayer () {
 		var root_only = $(this).is(":checked");
 		self.progression.root_only = root_only;
 	});
+
+  $(".chord-checkbox").change(function () {
+    var root_only = $(this).is(":checked");
+    self.progression.root_only = root_only;
+  });
 
 }
 
