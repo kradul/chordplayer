@@ -92,8 +92,6 @@ function ChordPlayer () {
 		clearInterval(self.intervalId);
 	}
 
-  
-
 	/*
 	Binding buttons
 	*/
@@ -176,10 +174,20 @@ function ChordPlayer () {
 	});
 
   $(".chord-checkbox").change(function () {
-    var root_only = $(this).is(":checked");
-    self.progression.root_only = root_only;
+    var include_chord = $(this).is(":checked");
+    var degree = parseInt($(this).val());
+    var val_available = $.inArray(degree, self.available_degrees) !== -1;
+    //add newly checked degree if not already present
+    if (!val_available && include_chord) {
+      self.available_degrees.push(degree);
+    } 
+    //removed newly unchecked degree if exists
+    if (val_available && !include_chord) {
+      self.available_degrees = jQuery.grep(self.available_degrees, function(i) {
+        return i != degree;
+      });
+    }
   });
-
 }
 
 
