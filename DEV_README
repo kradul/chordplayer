@@ -1,0 +1,10 @@
+
+"PRODUCTION":
+gh-pages is the branch served at the url (http://kradul.github.io/chordplayer/)
+
+TESTING LOCALLY:
+project is run locally with jekyll.
+
+cd into directory and run: bundle exec jekyll serve
+
+view project locally at: localhost:4000
