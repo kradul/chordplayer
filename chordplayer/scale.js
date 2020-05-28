@@ -1,12 +1,14 @@
 
-function Scale () {
+ScaleConstants = {}
+
+ScaleConstants.MAJOR_SCALE = [0,2,4,5,7,9,11]; //number of half steps each degree is from tonic
+ScaleConstants.HARMONIC_MINOR_SCALE = [0,2,3,5,7,8,11]
+
+function Scale (scale_intervals, final_interval) {
 	var self = this;
-	var MAJOR_SCALE = [0,2,4,5,7,9,11]; //number of half steps each degree is from tonic
 
-
-	this.scale_intervals = MAJOR_SCALE;
-	this.final_interval = 1; //TODO this is bad, this represents the interval between the last note of the scale 
-		//and the next tonic, currently hardcoded for major scale, need to think how to add it to scale 
+	this.scale_intervals = scale_intervals;
+	this.final_interval = final_interval; //this represents the interval between the last note of the scale 
 
 	/*degree of the major scale to get
 	returns the number of half steps the note is above the root of the scale

@@ -41,9 +41,6 @@
 <div id="settings-container">
 	<div id="settings-title">Settings</div>
 
-	<div>
-		<button id="change-key">Change Key</button>
-	</div>
 	<div id="speed">
 		<div class="settings-label">Speed</div>
 		<div> 
@@ -64,14 +61,25 @@
 	<input type="checkbox" name="root-only" id="root-only-checkbox"> Root Only
 
   <hr>
-  <div class="settings-label">Chords</div>
-  <input type="checkbox" class="chord-checkbox" id="chord-1" value="1" checked> I
-  <input type="checkbox" class="chord-checkbox" id="chord-2" value="2" checked> ii
-  <input type="checkbox" class="chord-checkbox" id="chord-3" value="3" checked> iii
-  <input type="checkbox" class="chord-checkbox" id="chord-4" value="4" checked> IV
-  <input type="checkbox" class="chord-checkbox" id="chord-5" value="5" checked> V
-  <input type="checkbox" class="chord-checkbox" id="chord-6" value="6" checked> vi
-  <input type="checkbox" class="chord-checkbox" id="chord-7" value="7" checked> vii
+  <div>
+    <button id="change-key">New Random Key</button>
+  </div>
+  <div>
+    <div class="subtitle">Key</div>
+    <input type="radio" value="major" class="key_radio" name="key_radio" checked> Major
+    <input type="radio" value="harmonic_minor" class="key_radio" name="key_radio"> Harmonic Minor
+  </div>
+  <div>
+    <div class="subtitle">Chords</div>
+    <input type="checkbox" class="chord-checkbox" id="chord-1" value="1" checked> I
+    <input type="checkbox" class="chord-checkbox" id="chord-2" value="2"> ii
+    <input type="checkbox" class="chord-checkbox" id="chord-3" value="3"> iii
+    <input type="checkbox" class="chord-checkbox" id="chord-4" value="4" checked> IV
+    <input type="checkbox" class="chord-checkbox" id="chord-5" value="5" checked> V
+    <input type="checkbox" class="chord-checkbox" id="chord-6" value="6"> vi
+    <input type="checkbox" class="chord-checkbox" id="chord-7" value="7"> vii
+  </div>
+
 </div>
 
 

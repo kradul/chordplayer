@@ -20,9 +20,9 @@ function ChordPlayer () {
 	this.delay = DEFAULT_DELAY; //time after chord that name is played
 	this.chordNamer = new ChordNamer();
 	this.progression = new Progression();
-	this.progression.scale = new Scale();
+	this.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
 	this.progression.tonic = midi_octave_notes[0]; //tonic = middle c
-	this.available_degrees = [1, 2, 3, 4, 5, 6, 7] //default chords that are available for playing
+	this.available_degrees = [1, 4, 5] //default chords that are available for playing
 
 	this.loaded = false; //whether loading MIDI stuff has finished
 	this.intervalId; //storing the id of the pending call of the chord playing function (for setTimeout)
@@ -186,6 +186,20 @@ function ChordPlayer () {
       self.available_degrees = jQuery.grep(self.available_degrees, function(i) {
         return i != degree;
       });
+    }
+  });
+
+  $(".key_radio").change(function () {
+    var key_name = document.querySelector('input[name="key_radio"]:checked').value;
+    switch(key_name) {
+      case "major":
+        self.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
+        break;
+      case "harmonic_minor":
+        self.progression.scale = new Scale(ScaleConstants.HARMONIC_MINOR_SCALE, 1);
+        break;
+      default:
+        break;
     }
   });
 }
