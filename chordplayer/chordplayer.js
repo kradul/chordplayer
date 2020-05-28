@@ -188,10 +188,16 @@ function ChordPlayer () {
     var key_name = $('input[name="key_radio"]:checked').val();
     switch(key_name) {
       case "major":
-        self.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
+        self.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE);
         break;
       case "harmonic_minor":
-        self.progression.scale = new Scale(ScaleConstants.HARMONIC_MINOR_SCALE, 1);
+        self.progression.scale = new Scale(ScaleConstants.HARMONIC_MINOR_SCALE);
+        break;
+      case "natural_minor":
+        self.progression.scale = new Scale(ScaleConstants.NATURAL_MINOR_SCALE);
+        break;
+      case "melodic_minor":
+        self.progression.scale = new Scale(ScaleConstants.NATURAL_MINOR_SCALE);
         break;
       default:
         break;

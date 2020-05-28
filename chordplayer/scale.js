@@ -2,13 +2,14 @@
 ScaleConstants = {}
 
 ScaleConstants.MAJOR_SCALE = [0,2,4,5,7,9,11]; //number of half steps each degree is from tonic
-ScaleConstants.HARMONIC_MINOR_SCALE = [0,2,3,5,7,8,11]
+ScaleConstants.HARMONIC_MINOR_SCALE = [0,2,3,5,7,8,11];
+ScaleConstants.NATURAL_MINOR_SCALE = [0,2,3,5,7,8,10];
+ScaleConstants.MELODIC_MINOR_SCALE = [0,2,3,5,7,9,11];
 
-function Scale (scale_intervals, final_interval) {
+function Scale (scale_intervals) {
 	var self = this;
 
 	this.scale_intervals = scale_intervals;
-	this.final_interval = final_interval; //this represents the interval between the last note of the scale 
 
 	/*degree of the major scale to get
 	returns the number of half steps the note is above the root of the scale
@@ -33,7 +34,7 @@ function Scale (scale_intervals, final_interval) {
 
 	this.octave_interval = function () {
 		//returns number of half steps one tonic is from the next tonic
-		return self.scale_intervals[self.scale_intervals.length - 1] + self.final_interval;
+		return 12;
 	}
 
 	this.set_scale = function (scale) {
