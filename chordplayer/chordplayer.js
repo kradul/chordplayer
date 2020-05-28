@@ -21,7 +21,7 @@ function ChordPlayer () {
 	this.delay = DEFAULT_DELAY; //time after chord that name is played
 	this.chordNamer = new ChordNamer();
 	this.progression = new Progression();
-	this.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
+	this.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE);
 	this.progression.tonic = midi_octave_notes[0]; //tonic = middle c
 
 	this.loaded = false; //whether loading MIDI stuff has finished
