@@ -16,18 +16,19 @@ DON'T change this to be larger than the minimum period*/
 
 function ChordPlayer () {
 	var self = this;
+
 	this.period = DEFAULT_PERIOD; //time between chord play in milliseconds
 	this.delay = DEFAULT_DELAY; //time after chord that name is played
 	this.chordNamer = new ChordNamer();
 	this.progression = new Progression();
 	this.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
 	this.progression.tonic = midi_octave_notes[0]; //tonic = middle c
-	this.available_degrees = [1, 4, 5] //default chords that are available for playing
 
 	this.loaded = false; //whether loading MIDI stuff has finished
 	this.intervalId; //storing the id of the pending call of the chord playing function (for setTimeout)
 
 	this.load = function () {
+    this.available_degrees = this.get_available_chords();
 		MIDI.loadPlugin({
 			soundfontUrl: "./midi/soundfont/",
 			instrument: "acoustic_grand_piano",
@@ -91,6 +92,12 @@ function ChordPlayer () {
 	this.stop_play = function () {
 		clearInterval(self.intervalId);
 	}
+
+  this.get_available_chords = function () {
+    return $.map($(".chord-checkbox:checked"), function(element) {
+      return parseInt(element.value);
+    });
+  }
 
 	/*
 	Binding buttons
@@ -174,19 +181,7 @@ function ChordPlayer () {
 	});
 
   $(".chord-checkbox").change(function () {
-    var include_chord = $(this).is(":checked");
-    var degree = parseInt($(this).val());
-    var val_available = $.inArray(degree, self.available_degrees) !== -1;
-    //add newly checked degree if not already present
-    if (!val_available && include_chord) {
-      self.available_degrees.push(degree);
-    } 
-    //removed newly unchecked degree if exists
-    if (val_available && !include_chord) {
-      self.available_degrees = jQuery.grep(self.available_degrees, function(i) {
-        return i != degree;
-      });
-    }
+    self.available_degrees = self.get_available_chords();
   });
 
   $(".key_radio").change(function () {
