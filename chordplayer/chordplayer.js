@@ -190,7 +190,7 @@ function ChordPlayer () {
   });
 
   $(".key_radio").change(function () {
-    var key_name = document.querySelector('input[name="key_radio"]:checked').value;
+    var key_name = $('input[name="key_radio"]:checked').val();
     switch(key_name) {
       case "major":
         self.progression.scale = new Scale(ScaleConstants.MAJOR_SCALE, 1);
